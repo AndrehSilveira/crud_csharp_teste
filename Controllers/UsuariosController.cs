@@ -2,6 +2,7 @@ using Data;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using Microsoft.EntityFrameworkCore;
+using csharp_crud_api.DTO;
 
 namespace Controllers;
 
@@ -18,26 +19,25 @@ public class UsuariosController : ControllerBase
  
   [NonAction]
   //FAZER A BUSCA DOS USUÁRIOS CADASTRADOS
-  public List<Usuarios> BuscarUsuarios(List<Usuarios> usuario)
+  public List<UsuarioDTO> BuscarUsuarios(List<Usuarios> usuario)
   {
-    var usuarioModel = new List<Usuarios>();
+    var usuariosDTO = new List<UsuarioDTO>();
     foreach(var item in usuario)
     {
-      var usuarioView = new Usuarios()
+      var usuarioView = new UsuarioDTO()
       {
         Id = item.Id,
         Nome = item.Nome,
-        Senha = "******",
         Status = item.Status
       };
-      usuarioModel.Add(usuarioView);
+      usuariosDTO.Add(usuarioView);
     }
-    return usuarioModel;
+    return usuariosDTO;
   }
 
   // GET: usuarios
   [HttpGet]
-  public ActionResult<IEnumerable<Usuarios>> GetUsers()
+  public ActionResult<IEnumerable<UsuarioDTO>> GetUsers()
   {
 
     var usuario = _context.Usuario.ToList();
