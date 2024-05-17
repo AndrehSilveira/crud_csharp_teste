@@ -129,3 +129,4 @@
 /Users/user/Documents/Desenvolvimento/Rodonaves/Codigo dozoto/csharp-crud-api-main/bin/Debug/net8.0/runtimes/win/lib/netcoreapp3.0/System.Windows.Extensions.dll
 /Users/user/Documents/Desenvolvimento/Rodonaves/Codigo dozoto/csharp-crud-api-main/bin/Debug/net8.0/MySqlConnector.dll
 /Users/user/Documents/Desenvolvimento/Rodonaves/Codigo dozoto/csharp-crud-api-main/bin/Debug/net8.0/Pomelo.EntityFrameworkCore.MySql.dll
+/Users/user/Documents/Desenvolvimento/Rodonaves/Codigo dozoto/csharp-crud-api-main/obj/Debug/net8.0/csharp-crud-api.sourcelink.json

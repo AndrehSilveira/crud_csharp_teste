@@ -50,7 +50,6 @@ public class UsuariosController : ControllerBase
     var usuarioModel = BuscarUsuarios(usuario);
 
     return Ok(usuarioModel);
-    //return Ok();
   }
 
   //GET: usuarios/lista/status
@@ -68,7 +67,6 @@ public class UsuariosController : ControllerBase
     var usuarioModel = BuscarUsuarios(usuario);
 
     return Ok(usuarioModel);
-    return Ok();
   }
 
   //GET: usuarios/5
@@ -87,7 +85,6 @@ public class UsuariosController : ControllerBase
     var usuarioModel = BuscarUsuarios(usuario);
     
     return Ok(usuarioModel);
-    return Ok();
   }
 
   //POST usuarios
@@ -102,22 +99,57 @@ public class UsuariosController : ControllerBase
 
   //PUT usuarios/5
   [HttpPut("{id}")]
-  public async Task<IActionResult> PutUser(int id, Usuarios user)
+  public ActionResult PutUser(int id,UsuarioDTOAlterar user)
   {
-    user.Id = id;
- 
-    try{
-      _context.Entry(user).State = EntityState.Modified;
-      await _context.SaveChangesAsync();
+    //user.Id = id;
 
-      UsuarioResposta resposta = new UsuarioResposta();
-      resposta.Sucesso = $"Usuário {id} alterado!";
+    var usuario = _context.Usuario.Where(x => x.Id == id).ToList();
+    string nome = "";
 
-      return Ok(resposta);
-    }
-    catch
+    foreach(var u in usuario)
     {
-      return BadRequest($"Usuário com ID {id} não encontrado...");
+      nome = u.Nome;
+    }
+
+    var usuarioView = new Usuarios()
+    {
+      Id = id,
+      Nome = nome,
+      Senha = user.Senha,
+      Status = user.Status
+    };
+
+    // List<Usuarios> usuarioAltera = new List<Usuarios>();
+    
+    // foreach(var u in usuario)
+    // {
+    //   var usuarioView = new Usuarios()
+    //   {
+    //     Id = id,
+    //     Nome = u.Nome,
+    //     Senha = user.Senha,
+    //     Status = user.Status
+    //   };
+    //   usuarioAltera.Add(usuarioView);
+    // }
+ 
+    try
+    {
+       _context.Entry(usuarioView).State = EntityState.Modified;
+      //_context.Entry(usuarioView).State = EntityState.Detached;
+      _context.SaveChangesAsync();
+
+      return Ok(usuarioView);
+
+      // UsuarioResposta resposta = new UsuarioResposta();
+      // resposta.Sucesso = $"Usuário {id} alterado!";
+
+      // return Ok(resposta);
+    }
+    catch(Exception ex)
+    {
+      //return BadRequest($"Usuário com ID {id} não encontrado...");
+      return BadRequest(ex.ToString());
     }
     
   }

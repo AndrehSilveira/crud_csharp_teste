@@ -18,6 +18,13 @@ namespace Models
     public bool Status { get; set; }
   }
 
+  public class UsuarioDTOAlterar
+    {
+        public int Id { get; set;}
+        public string? Senha { get; set; }
+        public bool Status { get; set; }
+    }
+
   public class UsuarioResposta
   {
     public string? Sucesso { get; set; }
